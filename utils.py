@@ -13,9 +13,9 @@ def load_candidates_from_json(path):
         return candidates
 
 
-def get_candidate(candidate_id):
+def get_candidate(path, candidate_id):
     """Возвращает одного кандидата по его id"""
-    candidates = load_candidates_from_json(CANDIDATES_JSON_PATH)
+    candidates = load_candidates_from_json(path)
     candidate = candidates[candidate_id]
     return candidate
 
@@ -40,6 +40,3 @@ def get_candidates_by_skill(skill_name):
             candidates_skills.append(candidate)
 
     return candidates_skills
-
-
-print(get_candidates_by_skill("python"))
