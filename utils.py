@@ -30,7 +30,16 @@ def get_candidates_by_name(candidate_name):
 
 def get_candidates_by_skill(skill_name):
     """Возвращает кандидатов по навыку"""
-    pass
+    candidates = load_candidates_from_json(CANDIDATES_JSON_PATH)
+    candidates_skills = []
+
+    for candidate in candidates.values():
+        candidate_skills = candidate['skills'].split(', ')
+        candidate_skills = [x.lower() for x in candidate_skills]
+        if skill_name in candidate_skills:
+            candidates_skills.append(candidate)
+
+    return candidates_skills
 
 
-print(get_candidates_by_name("Sheri Torres"))
+print(get_candidates_by_skill("python"))
