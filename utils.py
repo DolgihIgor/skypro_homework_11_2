@@ -1,6 +1,5 @@
 import json
 
-
 CANDIDATES_JSON_PATH = "candidates.json"
 
 
@@ -20,9 +19,13 @@ def get_candidate(candidate_id):
     candidate = candidates[candidate_id]
     return candidate
 
+
 def get_candidates_by_name(candidate_name):
     """Возвращает кандидатов по имени"""
-    pass
+    candidates = load_candidates_from_json(CANDIDATES_JSON_PATH)
+    for candidate in candidates.values():
+        if candidate["name"] == candidate_name:
+            return candidate
 
 
 def get_candidates_by_skill(skill_name):
@@ -30,3 +33,4 @@ def get_candidates_by_skill(skill_name):
     pass
 
 
+print(get_candidates_by_name("Sheri Torres"))
