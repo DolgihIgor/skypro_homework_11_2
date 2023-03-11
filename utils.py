@@ -16,8 +16,9 @@ def load_candidates_from_json(path):
 
 def get_candidate(candidate_id):
     """Возвращает одного кандидата по его id"""
-    pass
-
+    candidates = load_candidates_from_json(CANDIDATES_JSON_PATH)
+    candidate = candidates[candidate_id]
+    return candidate
 
 def get_candidates_by_name(candidate_name):
     """Возвращает кандидатов по имени"""
@@ -27,6 +28,5 @@ def get_candidates_by_name(candidate_name):
 def get_candidates_by_skill(skill_name):
     """Возвращает кандидатов по навыку"""
     pass
-
 
 
