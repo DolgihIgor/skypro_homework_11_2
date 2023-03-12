@@ -1,7 +1,9 @@
 from flask import Flask, render_template
-from utils import load_candidates_from_json, CANDIDATES_JSON_PATH, get_candidate, get_candidates_by_name
+from utils import load_candidates_from_json, CANDIDATES_JSON_PATH, get_candidate, get_candidates_by_name, \
+    get_candidates_by_skill
 
 app = Flask(__name__)
+
 
 @app.route("/")
 def page_index():
@@ -18,7 +20,14 @@ def page_candidate(candidate_id):
 @app.route("/search/<candidate_name>")
 def page_search(candidate_name):
     candidates_search, candidates_count = get_candidates_by_name(CANDIDATES_JSON_PATH, candidate_name)
-    print(candidates_search, candidates_count)
     return render_template("search.html", candidates_search=candidates_search, candidates_count=candidates_count)
+
+
+@app.route("/skill/<skill_name>")
+def page_skill(skill_name):
+    candidates_skill, candidates_count = get_candidates_by_skill(CANDIDATES_JSON_PATH, skill_name)
+    return render_template("skill.html", candidates_skill=candidates_skill, candidates_count=candidates_count,
+                           skill_name=skill_name)
+
 
 app.run()

@@ -36,15 +36,17 @@ def get_candidates_by_name(path, candidate_name):
     return candidates_search.values(), candidates_count
 
 
-def get_candidates_by_skill(skill_name):
+def get_candidates_by_skill(path, skill_name):
     """Возвращает кандидатов по навыку"""
-    candidates = load_candidates_from_json(CANDIDATES_JSON_PATH)
+    candidates = load_candidates_from_json(path)
+    sandidates_by_skill = {}
     candidates_skills = []
-
+    candidates_count = 0
     for candidate in candidates.values():
-        candidate_skills = candidate['skills'].split(', ')
+        candidate_skills = candidate["skills"].split(", ")
         candidate_skills = [x.lower() for x in candidate_skills]
         if skill_name in candidate_skills:
-            candidates_skills.append(candidate)
+            sandidates_by_skill[candidate["id"]] = candidate
+            candidates_count += 1
 
-    return candidates_skills
+    return sandidates_by_skill.values(), candidates_count
