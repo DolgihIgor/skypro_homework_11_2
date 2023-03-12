@@ -20,12 +20,20 @@ def get_candidate(path, candidate_id):
     return candidate
 
 
-def get_candidates_by_name(candidate_name):
+def get_candidates_by_name(path, candidate_name):
     """Возвращает кандидатов по имени"""
-    candidates = load_candidates_from_json(CANDIDATES_JSON_PATH)
+    candidates = load_candidates_from_json(path)
+    candidate_full_name = []
+
+    candidates_search = {}
+    candidates_count = 0
     for candidate in candidates.values():
-        if candidate["name"] == candidate_name:
-            return candidate
+        candidate_full_name = candidate["name"].split()
+        candidate_full_name = [x.lower() for x in candidate_full_name]
+        if candidate_name in candidate_full_name:
+            candidates_search[candidate["id"]] = candidate
+            candidates_count += 1
+    return candidates_search.values(), candidates_count
 
 
 def get_candidates_by_skill(skill_name):
